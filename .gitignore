@@ -1,3 +1,7 @@
+/PyPDF-img
+/static
+/__pycache__
+/templates
 /tflearn_logs
 /ocr-result
 /raw-pdf

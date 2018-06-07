@@ -3,7 +3,7 @@ Source Code:
 https://sourcedexter.com/tensorflow-text-classification-python/
 '''
 import nltk
-nltk.download('punkt')
+# nltk.download('punkt')
 
 from nltk import word_tokenize, sent_tokenize
 from nltk.stem.lancaster import LancasterStemmer
@@ -68,7 +68,7 @@ for each_category in data.keys():
         # print(each_sentence)
         # extract words from each sentence and append to the word list
         w = nltk.word_tokenize(each_sentence)
-        print("tokenized words: ", w)
+        # print("tokenized words: ", w)
         words.extend(w)
         docs.append((w, each_category))
 
@@ -133,11 +133,12 @@ net = tflearn.regression(net, optimizer='adam', learning_rate=0.001,
 # Define model and setup tensorboard
 model = tflearn.DNN(net, tensorboard_dir='tflearn_logs')
 # Start training (apply gradient descent algorithm)
-model.fit(train_x, train_y, n_epoch=1000, batch_size=8, show_metric=True)
-model.save('model.tflearn')
+# model.fit(train_x, train_y, n_epoch=1000, batch_size=8, show_metric=True)
+# model.save('model.tflearn')
 
 # Load saved model
 model.load('model.tflearn')
+model.save('model.tflearn')
 
 # let's test the mdodel for a few sentences:
 # the first two sentences are used for training, and the last two sentences are not present in the training data.
@@ -165,7 +166,7 @@ def get_tf_record(sentence):
     return (np.array(bow))
 
 # we can start to predict the results for each of the 4 sentences
-print('(', sent_1, ') is:', categories[np.argmax(model.predict([get_tf_record(sent_1)]))])
-print('(', sent_2, ') is:', categories[np.argmax(model.predict([get_tf_record(sent_2)]))])
-print('(', sent_3, ') is:', categories[np.argmax(model.predict([get_tf_record(sent_3)]))])
-print('(', sent_4, ') is:', categories[np.argmax(model.predict([get_tf_record(sent_4)]))])
+print('(', sent_1, ') is:', categories[np.argmax(model.predict([get_tf_record(sent_1)]))],'(',np.amax(model.predict([get_tf_record(sent_1)])),')')
+print('(', sent_2, ') is:', categories[np.argmax(model.predict([get_tf_record(sent_2)]))],'(',np.amax(model.predict([get_tf_record(sent_2)])),')')
+print('(', sent_3, ') is:', categories[np.argmax(model.predict([get_tf_record(sent_3)]))],'(',np.amax(model.predict([get_tf_record(sent_3)])),')')
+print('(', sent_4, ') is:', categories[np.argmax(model.predict([get_tf_record(sent_4)]))],'(',np.amax(model.predict([get_tf_record(sent_4)])),')')
